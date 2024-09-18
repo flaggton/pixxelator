@@ -5,8 +5,11 @@ import io.flaggton.pixxelator.services.JfxUiService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -24,19 +27,34 @@ public class MainController implements Initializable {
 
     private final JfxUiService jfxUiService;
 
+    private Pane drawingPane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Button button = new Button();
-        ZoomableScrollPane zoomableScrollPane = new ZoomableScrollPane(button);
-        borderPane.setCenter(zoomableScrollPane);
     }
+
     public void onExitMenuItemClick() {
         Platform.exit();
         System.exit(0);
     }
-    public void onNewCanvasButtonClick(){
+
+    public void onNewCanvasButtonClick() {
         System.out.println("onNewCanvasButtonClick()");
+        borderPane.setCenter(createDrawingPane(400, 400));
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    private ZoomableScrollPane createDrawingPane(int width, int height) {
+        Pane pane = new Pane();
+        pane.setPrefWidth(width);
+        pane.setMaxWidth(width);
+        pane.setMinWidth(width);
+        pane.setPrefHeight(height);
+        pane.setMaxHeight(height);
+        pane.setMinHeight(height);
+        pane.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
+        drawingPane = pane;
+        return new ZoomableScrollPane(pane);
     }
 }
 
