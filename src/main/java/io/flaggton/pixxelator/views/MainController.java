@@ -35,5 +35,8 @@ public class MainController implements Initializable {
         Platform.exit();
         System.exit(0);
     }
+    public void onNewCanvasButtonClick(){
+        System.out.println("onNewCanvasButtonClick()");
+    }
 }
 

@@ -10,6 +10,8 @@
         <menus>
           <Menu mnemonicParsing="false" text="Start">
             <items>
+                  <MenuItem mnemonicParsing="false" onAction="#onNewCanvasButtonClick" text="New Canvas" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
               <MenuItem mnemonicParsing="false" onAction="#onExitMenuItemClick" text="Exit" />
             </items>
           </Menu>
