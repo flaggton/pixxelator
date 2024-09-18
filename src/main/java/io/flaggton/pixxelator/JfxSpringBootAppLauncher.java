@@ -98,7 +98,7 @@ public class JfxSpringBootAppLauncher {
         public void onApplicationEvent(JfxApplicationStartEvent event) {
             try {
                 log.info(LOG_PREFIX + "Computing 'JfxApplicationStartEvent'...");
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/io/flaggton/pixxelator/views/ui.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/io/flaggton/pixxelator/views/main.fxml"));
                 fxmlLoader.setControllerFactory(springApplicationContext::getBean);
                 Parent root = fxmlLoader.load();
                 Scene scene = new Scene(root, 600, 600);
