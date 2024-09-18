@@ -1,4 +1,4 @@
-package com.wedasoft.javafxspringbootgradleapp.persistence.todo;
+package io.flaggton.pixxelator.persistence.todo;
 
 import jakarta.persistence.*;
 import lombok.*;

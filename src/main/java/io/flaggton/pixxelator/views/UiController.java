@@ -1,8 +1,8 @@
-package com.wedasoft.javafxspringbootgradleapp.views;
+package io.flaggton.pixxelator.views;
 
-import com.wedasoft.javafxspringbootgradleapp.persistence.todo.Todo;
-import com.wedasoft.javafxspringbootgradleapp.persistence.todo.TodoRepository;
-import com.wedasoft.javafxspringbootgradleapp.services.JfxUiService;
+import io.flaggton.pixxelator.persistence.todo.Todo;
+import io.flaggton.pixxelator.persistence.todo.TodoRepository;
+import io.flaggton.pixxelator.services.JfxUiService;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -61,7 +61,7 @@ public class UiController implements Initializable {
                 "Non-Spring component dialog",
                 true,
                 true,
-                getClass().getResource("/com/wedasoft/javafxspringbootgradleapp/views/dialog.fxml"),
+                getClass().getResource("/io/flaggton/pixxelator/views/dialog.fxml"),
                 new Dimension2D(600, 400),
                 dialogController -> ((DialogController) dialogController).init());
     }

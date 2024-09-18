@@ -1,6 +1,6 @@
-package com.wedasoft.javafxspringbootgradleapp.views;
+package io.flaggton.pixxelator.views;
 
-import com.wedasoft.javafxspringbootgradleapp.persistence.todo.TodoRepository;
+import io.flaggton.pixxelator.persistence.todo.TodoRepository;
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.fxml.FXML;

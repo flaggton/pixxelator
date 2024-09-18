@@ -1,4 +1,4 @@
-package com.wedasoft.javafxspringbootgradleapp;
+package io.flaggton.pixxelator;
 
 import javafx.application.Application;
 import javafx.application.HostServices;
@@ -22,7 +22,7 @@ import java.io.IOException;
 public class JfxSpringBootAppLauncher {
 
     public static final String LOG_PREFIX = "JavaFx Spring Boot lifecycle: ";
-    public static final String SPLASHSCREEN_CLASS_PATH = "com.wedasoft.javafxspringbootgradleapp.SplashScreenPreloader";
+    public static final String SPLASHSCREEN_CLASS_PATH = "io.flaggton.pixxelator.SplashScreenPreloader";
 
     public static void main(String[] args) {
         log.info(LOG_PREFIX + "Starting application via main method...");
@@ -98,7 +98,7 @@ public class JfxSpringBootAppLauncher {
         public void onApplicationEvent(JfxApplicationStartEvent event) {
             try {
                 log.info(LOG_PREFIX + "Computing 'JfxApplicationStartEvent'...");
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/wedasoft/javafxspringbootgradleapp/views/ui.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/io/flaggton/pixxelator/views/ui.fxml"));
                 fxmlLoader.setControllerFactory(springApplicationContext::getBean);
                 Parent root = fxmlLoader.load();
                 Scene scene = new Scene(root, 600, 600);

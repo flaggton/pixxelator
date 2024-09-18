@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wedasoft.javafxspringbootgradleapp.views.DialogController">
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.flaggton.pixxelator.views.DialogController">
    <children>
       <GridPane hgap="5.0" vgap="5.0">
         <columnConstraints>

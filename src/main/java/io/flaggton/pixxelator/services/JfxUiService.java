@@ -1,4 +1,4 @@
-package com.wedasoft.javafxspringbootgradleapp.services;
+package io.flaggton.pixxelator.services;
 
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Dimension2D;

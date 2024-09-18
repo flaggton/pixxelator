@@ -12,8 +12,8 @@ plugins {
     id "application"
 }
 
-group = 'com.wedasoft'
-version = '2.5.0'
+group = 'io.flaggton'
+version = '0.0.1'
 
 repositories {
     mavenCentral()
@@ -53,7 +53,7 @@ dependencies {
 }
 
 application {
-    mainClass = 'com.wedasoft.javafxspringbootgradleapp.JfxSpringBootAppLauncher'
+    mainClass = 'io.flaggton.pixxelator.JfxSpringBootAppLauncher'
 }
 
 javafx {

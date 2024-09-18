@@ -1,4 +1,4 @@
-package com.wedasoft.javafxspringbootgradleapp;
+package io.flaggton.pixxelator;
 
 import javafx.application.Preloader;
 import javafx.geometry.Pos;
