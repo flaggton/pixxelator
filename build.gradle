@@ -51,7 +51,7 @@ dependencies {
     implementation 'com.wedasoft:wedasoftfxguicommons:1.0.0'
     implementation 'com.wedasoft:wedasoftfxtestbase:1.0.0'
 
-    implementation("com.wedasoft:wedasoftfxcustomnodes:1.0.0")
+    implementation("com.wedasoft:wedasoftfxcustomnodes:1.1.0")
 
 }
 
