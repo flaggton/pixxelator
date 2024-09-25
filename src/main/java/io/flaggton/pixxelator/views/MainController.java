@@ -1,24 +1,12 @@
 package io.flaggton.pixxelator.views;
 
-import com.wedasoft.wedasoftFxCustomNodes.zoomableScrollPane.ZoomableScrollPane;
+import io.flaggton.pixxelator.models.StandardDrawingPane;
 import io.flaggton.pixxelator.services.JfxUiService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -29,19 +17,15 @@ import java.util.ResourceBundle;
 
 @Component
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-@RequiredArgsConstructor
 public class MainController implements Initializable {
+    @Autowired
+    private JfxUiService jfxUiService;
     @FXML
     private BorderPane borderPane;
 
-    private final JfxUiService jfxUiService;
-
-    private Pane drawingPane;
-    private Path drawingPath;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        borderPane.setCenter(createDrawingPane(400, 400));
+        borderPane.setCenter(new StandardDrawingPane(400, 400));
     }
 
     public void onExitMenuItemClick() {
@@ -49,58 +33,16 @@ public class MainController implements Initializable {
         System.exit(0);
     }
 
-    public void onNewCanvasButtonClick() {
-//        borderPane.setCenter(createDrawingPane(400, 400));
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/io/flaggton/pixxelator/views/canvas-creation.fxml"));
-            Parent root = fxmlLoader.load();
-
-            Stage newCanvasStage = new Stage();
-            newCanvasStage.setTitle("New Canvas");
-            newCanvasStage.initModality(Modality.WINDOW_MODAL);
-            newCanvasStage.setScene(new Scene(root));
-            newCanvasStage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void onNewCanvasButtonClick() throws IOException {
+        jfxUiService.createAndShowFxmlDialog("New Canvas", true, false,
+                getClass().getResource("/io/flaggton/pixxelator/views/canvas-creation.fxml"),
+                null,
+                c -> ((CanvasCreationController) c).init(zoomableScrollPane -> {
+                    // machIrgendwas von Consumer wird hier gemacht
+                    borderPane.setCenter(zoomableScrollPane);
+                }));
     }
 
-    @SuppressWarnings("SameParameterValue")
-    private ZoomableScrollPane createDrawingPane(int width, int height) {
-        Pane pane = new Pane();
-        pane.setPrefWidth(width);
-        pane.setMaxWidth(width);
-        pane.setMinWidth(width);
-        pane.setPrefHeight(height);
-        pane.setMaxHeight(height);
-        pane.setMinHeight(height);
-        pane.setBackground(new Background(new BackgroundFill(Color.SALMON, null, null)));
-        drawingPane = pane;
-        enableDrawingOnPane(drawingPane);
-        return new ZoomableScrollPane(pane);
-    }
 
-    private void enableDrawingOnPane(Pane pane) {
-        pane.setOnMousePressed(e -> {
-            if (e.isPrimaryButtonDown()) {
-                drawingPath = new Path();
-                drawingPath.setStroke(Color.BLACK);
-                drawingPath.setStrokeWidth(3);
-                drawingPath.getElements().add(new MoveTo(e.getX(), e.getY()));
-                pane.getChildren().add(drawingPath);
-            }
-        });
-
-        pane.setOnMouseDragged(e -> {
-            if (e.isPrimaryButtonDown() && isWithinBounds(e.getX(), e.getY(), pane)) {
-                // Bei Ziehen der Maus die Linie weiterzeichnen
-                drawingPath.getElements().add(new LineTo(e.getX(), e.getY()));
-            }
-        });
-    }
-
-    private boolean isWithinBounds(double x, double y, Pane pane) {
-        return x >= 0 && x <= pane.getWidth() && y >= 0 && y <= pane.getHeight();
-    }
 }
 
