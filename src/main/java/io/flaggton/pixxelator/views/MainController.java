@@ -35,6 +35,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        borderPane.setCenter(createDrawingPane(400, 400));
     }
 
     public void onExitMenuItemClick() {
