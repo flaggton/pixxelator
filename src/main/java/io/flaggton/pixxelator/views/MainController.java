@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 @Component
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class MainController implements Initializable {
+    @SuppressWarnings("unused")
     @Autowired
     private JfxUiService jfxUiService;
     @FXML

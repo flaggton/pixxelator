@@ -5,6 +5,7 @@
 2. The User shall be capable of creating a Canvas with adjustable size
 3. The User shall be capable of saving the canvas as a .png/.jpg
 2. The User shall be capable of loading a .png/.jpg into the canvas
+3. The User shall be capable of seeing info, warn and error dialogs (extend jfxUiService with 3 according methods)
 
 3. Eraser function
 3. Color palette
