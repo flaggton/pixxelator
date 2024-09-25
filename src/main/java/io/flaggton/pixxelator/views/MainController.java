@@ -1,5 +1,6 @@
 package io.flaggton.pixxelator.views;
 
+import io.flaggton.pixxelator.models.PixelDrawingPane;
 import io.flaggton.pixxelator.models.StandardDrawingPane;
 import io.flaggton.pixxelator.services.JfxUiService;
 import javafx.application.Platform;
@@ -34,7 +35,7 @@ public class MainController implements Initializable {
         System.exit(0);
     }
 
-    public void onNewCanvasButtonClick() throws IOException {
+    public void onNewStandardCanvasButtonClick() throws IOException {
         jfxUiService.createAndShowFxmlDialog("New Canvas", true, false,
                 getClass().getResource("/io/flaggton/pixxelator/views/canvas-creation.fxml"),
                 null,
@@ -44,6 +45,8 @@ public class MainController implements Initializable {
                 }));
     }
 
-
+    public void onNewPixelCanvasButtonClick() {
+        borderPane.setCenter(new PixelDrawingPane(5, 10));
+    }
 }
 
