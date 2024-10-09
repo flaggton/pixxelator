@@ -1,7 +1,7 @@
 package io.flaggton.pixxelator.models;
 
 import com.wedasoft.wedasoftFxCustomNodes.zoomableScrollPane.ZoomableScrollPane;
-import javafx.scene.Node;
+import io.flaggton.pixxelator.enums.DrawingMode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
@@ -10,7 +10,7 @@ import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 
-public class StandardDrawingPane extends ZoomableScrollPane {
+public class StandardDrawingPane extends ZoomableScrollPane implements DrawingModeSelectable {
     private Path drawingPath;
 
     public StandardDrawingPane(int width, int height) {
@@ -41,5 +41,10 @@ public class StandardDrawingPane extends ZoomableScrollPane {
     }
     private boolean isWithinBounds(double x, double y, Pane pane) {
         return x >= 0 && x <= pane.getWidth() && y >= 0 && y <= pane.getHeight();
+    }
+
+    @Override
+    public void setDrawingMode(DrawingMode drawingMode) {
+        System.out.println("StandardDrawingPane drawingMode = " + drawingMode);
     }
 }

@@ -1,11 +1,14 @@
 package io.flaggton.pixxelator.views;
 
+import io.flaggton.pixxelator.enums.DrawingMode;
+import io.flaggton.pixxelator.models.DrawingModeSelectable;
 import io.flaggton.pixxelator.models.PixelDrawingPane;
 import io.flaggton.pixxelator.models.StandardDrawingPane;
 import io.flaggton.pixxelator.services.JfxUiService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -41,8 +44,11 @@ public class MainController implements Initializable {
         borderPane.setCenter(new StandardDrawingPane(400, 400));
         ToggleGroup drawingActions = new ToggleGroup();
         unsetRadioButton.setToggleGroup(drawingActions);
+        unsetRadioButton.setOnAction(actionEvent -> onDrawingModeSelected(DrawingMode.UNSET));
         pencilRadioButton.setToggleGroup(drawingActions);
+        pencilRadioButton.setOnAction(actionEvent -> onDrawingModeSelected(DrawingMode.PENCIL));
         bucketRadioButton.setToggleGroup(drawingActions);
+        bucketRadioButton.setOnAction(actionEvent -> onDrawingModeSelected(DrawingMode.BUCKET));
         drawingActions.selectToggle(unsetRadioButton);
     }
 
@@ -63,6 +69,12 @@ public class MainController implements Initializable {
 
     public void onNewPixelCanvasButtonClick() {
         borderPane.setCenter(new PixelDrawingPane(5, 10));
+    }
+
+    private void onDrawingModeSelected(DrawingMode selectedDrawingMode) {
+        Node anyDrawingPane = borderPane.getCenter();
+        DrawingModeSelectable drawingModeSelectable = (DrawingModeSelectable) anyDrawingPane;
+        drawingModeSelectable.setDrawingMode(selectedDrawingMode);
     }
 }
 

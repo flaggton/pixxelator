@@ -1,13 +1,14 @@
 package io.flaggton.pixxelator.models;
 
 import com.wedasoft.wedasoftFxCustomNodes.zoomableScrollPane.ZoomableScrollPane;
+import io.flaggton.pixxelator.enums.DrawingMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.util.Random;
 
-public class PixelDrawingPane extends ZoomableScrollPane {
+public class PixelDrawingPane extends ZoomableScrollPane implements DrawingModeSelectable {
     Random random = new Random();
 
     public PixelDrawingPane(int widthInPx, int heightInPx) {
@@ -26,5 +27,10 @@ public class PixelDrawingPane extends ZoomableScrollPane {
         rectangle.setHeight(1);
         rectangle.setFill(Color.color(random.nextDouble(), random.nextDouble(), random.nextDouble()));
         return rectangle;
+    }
+
+    @Override
+    public void setDrawingMode(DrawingMode drawingMode) {
+        System.out.println("PixelDrawingPane drawingMode = " + drawingMode);
     }
 }
