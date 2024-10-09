@@ -8,7 +8,7 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.Random;
 
-public class PixelDrawingPane extends ZoomableScrollPane implements DrawingModeSelectable {
+public class PixelDrawingPane extends ZoomableScrollPane implements DrawingPaneActions {
     Random random = new Random();
 
     public PixelDrawingPane(int widthInPx, int heightInPx) {
@@ -32,5 +32,10 @@ public class PixelDrawingPane extends ZoomableScrollPane implements DrawingModeS
     @Override
     public void setDrawingMode(DrawingMode drawingMode) {
         System.out.println("PixelDrawingPane drawingMode = " + drawingMode);
+    }
+
+    @Override
+    public void setColor(Color selectedColor) {
+        System.out.println("PixelDrawingPane selectedColor = " + selectedColor.toString());
     }
 }

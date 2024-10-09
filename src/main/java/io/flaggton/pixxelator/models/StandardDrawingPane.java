@@ -10,7 +10,7 @@ import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 
-public class StandardDrawingPane extends ZoomableScrollPane implements DrawingModeSelectable {
+public class StandardDrawingPane extends ZoomableScrollPane implements DrawingPaneActions {
     private Path drawingPath;
 
     public StandardDrawingPane(int width, int height) {
@@ -46,5 +46,10 @@ public class StandardDrawingPane extends ZoomableScrollPane implements DrawingMo
     @Override
     public void setDrawingMode(DrawingMode drawingMode) {
         System.out.println("StandardDrawingPane drawingMode = " + drawingMode);
+    }
+
+    @Override
+    public void setColor(Color selectedColor) {
+        System.out.println("StandardDrawingPane selectedColor = " + selectedColor.toString());
     }
 }

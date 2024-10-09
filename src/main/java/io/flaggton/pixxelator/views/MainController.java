@@ -1,7 +1,7 @@
 package io.flaggton.pixxelator.views;
 
 import io.flaggton.pixxelator.enums.DrawingMode;
-import io.flaggton.pixxelator.models.DrawingModeSelectable;
+import io.flaggton.pixxelator.models.DrawingPaneActions;
 import io.flaggton.pixxelator.models.PixelDrawingPane;
 import io.flaggton.pixxelator.models.StandardDrawingPane;
 import io.flaggton.pixxelator.services.JfxUiService;
@@ -13,6 +13,7 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -42,6 +43,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         borderPane.setCenter(new StandardDrawingPane(400, 400));
+
         ToggleGroup drawingActions = new ToggleGroup();
         unsetRadioButton.setToggleGroup(drawingActions);
         unsetRadioButton.setOnAction(actionEvent -> onDrawingModeSelected(DrawingMode.UNSET));
@@ -50,6 +52,9 @@ public class MainController implements Initializable {
         bucketRadioButton.setToggleGroup(drawingActions);
         bucketRadioButton.setOnAction(actionEvent -> onDrawingModeSelected(DrawingMode.BUCKET));
         drawingActions.selectToggle(unsetRadioButton);
+
+        colorpicker.setOnAction(actionEvent -> onColorSelected(colorpicker.getValue()));
+
     }
 
     public void onExitMenuItemClick() {
@@ -73,8 +78,14 @@ public class MainController implements Initializable {
 
     private void onDrawingModeSelected(DrawingMode selectedDrawingMode) {
         Node anyDrawingPane = borderPane.getCenter();
-        DrawingModeSelectable drawingModeSelectable = (DrawingModeSelectable) anyDrawingPane;
-        drawingModeSelectable.setDrawingMode(selectedDrawingMode);
+        DrawingPaneActions drawingPaneActions = (DrawingPaneActions) anyDrawingPane;
+        drawingPaneActions.setDrawingMode(selectedDrawingMode);
+    }
+
+    private void onColorSelected(Color selectedColor) {
+        Node anyDrawingPane = borderPane.getCenter();
+        DrawingPaneActions drawingPaneActions = (DrawingPaneActions) anyDrawingPane;
+        drawingPaneActions.setColor(selectedColor);
     }
 }
 
