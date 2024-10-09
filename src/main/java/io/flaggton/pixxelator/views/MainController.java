@@ -6,6 +6,9 @@ import io.flaggton.pixxelator.services.JfxUiService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -24,10 +27,23 @@ public class MainController implements Initializable {
     private JfxUiService jfxUiService;
     @FXML
     private BorderPane borderPane;
+    @FXML
+    private RadioButton unsetRadioButton;
+    @FXML
+    private RadioButton pencilRadioButton;
+    @FXML
+    private RadioButton bucketRadioButton;
+    @FXML
+    private ColorPicker colorpicker;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         borderPane.setCenter(new StandardDrawingPane(400, 400));
+        ToggleGroup drawingActions = new ToggleGroup();
+        unsetRadioButton.setToggleGroup(drawingActions);
+        pencilRadioButton.setToggleGroup(drawingActions);
+        bucketRadioButton.setToggleGroup(drawingActions);
+        drawingActions.selectToggle(unsetRadioButton);
     }
 
     public void onExitMenuItemClick() {
