@@ -16,24 +16,24 @@ public class PixelDrawingPane extends ZoomableScrollPane implements DrawingPaneA
         GridPane gridPane = (GridPane) getContentNode();
         for (int x = 0; x < widthInPx; x++) {
             for (int y = 0; y < heightInPx; y++) {
-                gridPane.add(createRectangle(), x, y);
+                gridPane.add(createPixelTile(), x, y);
             }
         }
     }
 
-    private Rectangle createRectangle() {
-        Rectangle rectangle = new Rectangle();
-        rectangle.setWidth(10);
-        rectangle.setHeight(10);
-        rectangle.setPickOnBounds(true);
-        rectangle.setOnMouseClicked(e -> onPixelClickOrDragOver(e, rectangle));
-        rectangle.setOnMouseDragEntered(e -> onPixelClickOrDragOver(e, rectangle));
-        return rectangle;
+    private Rectangle createPixelTile() {
+        Rectangle pixel = new Rectangle();
+        pixel.setWidth(1);
+        pixel.setHeight(1);
+        pixel.setPickOnBounds(true);
+        pixel.setOnMouseClicked(e -> onPixelClickOrDragOver(e, pixel));
+        pixel.setOnMouseDragEntered(e -> onPixelClickOrDragOver(e, pixel));
+        return pixel;
     }
 
-    private void onPixelClickOrDragOver(MouseEvent e, Rectangle rectangle) {
+    private void onPixelClickOrDragOver(MouseEvent e, Rectangle pixel) {
         if (drawingMode == DrawingMode.PENCIL) {
-            rectangle.setFill(selectedColor);
+            pixel.setFill(selectedColor);
         }
     }
 

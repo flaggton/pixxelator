@@ -3,7 +3,6 @@ package io.flaggton.pixxelator.views;
 import io.flaggton.pixxelator.enums.DrawingMode;
 import io.flaggton.pixxelator.models.DrawingPaneActions;
 import io.flaggton.pixxelator.models.PixelDrawingPane;
-import io.flaggton.pixxelator.models.StandardDrawingPane;
 import io.flaggton.pixxelator.services.JfxUiService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -43,7 +42,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        borderPane.setCenter(new StandardDrawingPane(400, 400));
+        borderPane.setCenter(new PixelDrawingPane(64, 64));
 
         ToggleGroup drawingActions = new ToggleGroup();
         unsetRadioButton.setToggleGroup(drawingActions);
