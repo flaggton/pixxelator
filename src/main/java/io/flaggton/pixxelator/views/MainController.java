@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,9 @@ public class MainController implements Initializable {
 
         colorpicker.setOnAction(actionEvent -> onColorSelected(colorpicker.getValue()));
 
+        Platform.runLater(() -> {
+            borderPane.getScene().addEventFilter(MouseEvent.DRAG_DETECTED, e -> borderPane.getScene().startFullDrag()); // drag over tile with starting dragging from outside
+        });
     }
 
     public void onExitMenuItemClick() {
