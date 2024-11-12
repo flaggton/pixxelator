@@ -1,8 +1,11 @@
 package io.flaggton.pixxelator.views;
 
+import com.wedasoft.wedasoftFxCustomNodes.zoomableScrollPane.ZoomableScrollPane;
+import com.wedasoft.wedasoftFxGuiCommons.jfxDialogs.JfxDialogUtil;
 import io.flaggton.pixxelator.enums.DrawingMode;
 import io.flaggton.pixxelator.models.DrawingPaneActions;
 import io.flaggton.pixxelator.models.PixelDrawingPane;
+import io.flaggton.pixxelator.services.HelperService;
 import io.flaggton.pixxelator.services.JfxUiService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -11,14 +14,20 @@ import javafx.scene.Node;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -89,6 +98,26 @@ public class MainController implements Initializable {
         Node anyDrawingPane = borderPane.getCenter();
         DrawingPaneActions drawingPaneActions = (DrawingPaneActions) anyDrawingPane;
         drawingPaneActions.setColor(selectedColor);
+    }
+
+    public void onSaveAsButtonClick() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save image");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG Files", "*.png"));
+        File file = fileChooser.showSaveDialog(null);
+
+        if (file != null) {
+            try {
+                ZoomableScrollPane drawPane = (ZoomableScrollPane) borderPane.getCenter();
+                drawPane.resetZoom();
+                WritableImage writableImage = HelperService.createWritableImageFromPane((Pane) drawPane.getContentNode());
+                BufferedImage bufferedImage = HelperService.createBufferedImageFromWritableImage(writableImage);
+                ImageIO.write(bufferedImage, "png", file);
+            } catch (Exception e) {
+                JfxDialogUtil.createErrorDialog("Image couldn't be saved.", e).showAndWait();
+            }
+        }
+
     }
 }
 
