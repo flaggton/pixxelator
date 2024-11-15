@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public class PixelDrawingPane extends ZoomableScrollPane implements DrawingPaneActions {
@@ -40,6 +41,9 @@ public class PixelDrawingPane extends ZoomableScrollPane implements DrawingPaneA
         if (drawingMode == DrawingMode.FILL_ALL) {
             fillAllPixelsWithColor();
         }
+        if (drawingMode == DrawingMode.REPLACE_PIXEL_COLOR) {
+            replaceColorOfPixels(pixel.getFill(), selectedColor);
+        }
     }
 
     private void fillAllPixelsWithColor() {
@@ -47,6 +51,17 @@ public class PixelDrawingPane extends ZoomableScrollPane implements DrawingPaneA
             if (node instanceof Rectangle) { // <- überprüft ob alle "node" wirklich Rectangle sind, bevor gecastet wird -> Program geht nicht kabumm
                 Rectangle pixel = (Rectangle) node;
                 pixel.setFill(selectedColor);
+            }
+        }
+    }
+
+    private void replaceColorOfPixels(Paint paintToReplace, Color newColor) {
+        for (Node node : gridPane.getChildren()) {
+            if (node instanceof Rectangle) {
+                Rectangle pixel = (Rectangle) node;
+                if (pixel.getFill().equals(paintToReplace)) {
+                    pixel.setFill(newColor);
+                }
             }
         }
     }
