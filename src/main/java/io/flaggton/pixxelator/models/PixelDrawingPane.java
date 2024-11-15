@@ -35,6 +35,8 @@ public class PixelDrawingPane extends ZoomableScrollPane implements DrawingPaneA
         if (drawingMode == DrawingMode.PENCIL) {
             pixel.setFill(selectedColor);
         }
+        if (drawingMode == DrawingMode.FILL_ALL) {
+        }
     }
 
     @Override

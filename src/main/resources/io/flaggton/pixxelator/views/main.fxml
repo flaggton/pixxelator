@@ -46,7 +46,7 @@
                 <children>
                     <RadioButton fx:id="unsetRadioButton" mnemonicParsing="false" text="Unset"/>
                     <RadioButton fx:id="pencilRadioButton" mnemonicParsing="false" text="Pencil"/>
-                    <RadioButton fx:id="bucketRadioButton" mnemonicParsing="false" text="Bucket"/>
+                    <RadioButton fx:id="fillAllRadioButton" mnemonicParsing="false" text="Fill all"/>
                     <Separator prefWidth="200.0"/>
                     <ColorPicker fx:id="colorpicker" maxWidth="1.7976931348623157E308"/>
                 </children>

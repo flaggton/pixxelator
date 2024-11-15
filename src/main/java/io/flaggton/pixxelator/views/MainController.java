@@ -45,7 +45,7 @@ public class MainController implements Initializable {
     @FXML
     private RadioButton pencilRadioButton;
     @FXML
-    private RadioButton bucketRadioButton;
+    private RadioButton fillAllRadioButton;
     @FXML
     private ColorPicker colorpicker;
 
@@ -58,8 +58,8 @@ public class MainController implements Initializable {
         unsetRadioButton.setOnAction(actionEvent -> onDrawingModeSelected(DrawingMode.UNSET));
         pencilRadioButton.setToggleGroup(drawingActions);
         pencilRadioButton.setOnAction(actionEvent -> onDrawingModeSelected(DrawingMode.PENCIL));
-        bucketRadioButton.setToggleGroup(drawingActions);
-        bucketRadioButton.setOnAction(actionEvent -> onDrawingModeSelected(DrawingMode.BUCKET));
+        fillAllRadioButton.setToggleGroup(drawingActions);
+        fillAllRadioButton.setOnAction(actionEvent -> onDrawingModeSelected(DrawingMode.FILL_ALL));
         drawingActions.selectToggle(unsetRadioButton);
 
         colorpicker.setOnAction(actionEvent -> onColorSelected(colorpicker.getValue()));
@@ -117,7 +117,6 @@ public class MainController implements Initializable {
                 JfxDialogUtil.createErrorDialog("Image couldn't be saved.", e).showAndWait();
             }
         }
-
     }
 }
-
+// IMPLEMENTIERE Fill all !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
