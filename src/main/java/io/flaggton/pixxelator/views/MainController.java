@@ -49,6 +49,8 @@ public class MainController implements Initializable {
     @FXML
     private RadioButton replacePixelColorRadioButton;
     @FXML
+    private RadioButton standardBucketRadioButton;
+    @FXML
     private ColorPicker colorpicker;
 
     @Override
@@ -64,6 +66,8 @@ public class MainController implements Initializable {
         fillAllRadioButton.setOnAction(actionEvent -> onDrawingModeSelected(DrawingMode.FILL_ALL));
         replacePixelColorRadioButton.setToggleGroup(drawingActions);
         replacePixelColorRadioButton.setOnAction(actionEvent -> onDrawingModeSelected(DrawingMode.REPLACE_PIXEL_COLOR));
+        standardBucketRadioButton.setToggleGroup(drawingActions);
+        standardBucketRadioButton.setOnAction(actionEvent -> onDrawingModeSelected(DrawingMode.STANDARD_BUCKET));
         drawingActions.selectToggle(unsetRadioButton);
 
         colorpicker.setOnAction(actionEvent -> onColorSelected(colorpicker.getValue()));

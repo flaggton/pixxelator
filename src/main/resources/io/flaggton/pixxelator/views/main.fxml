@@ -49,6 +49,7 @@
                     <RadioButton fx:id="fillAllRadioButton" mnemonicParsing="false" text="Fill all"/>
                     <RadioButton fx:id="replacePixelColorRadioButton" mnemonicParsing="false"
                                  text="Replace pixel color"/>
+                    <RadioButton fx:id="standardBucketRadioButton" mnemonicParsing="false" text="Bucket (Standard)"/>
                     <Separator prefWidth="200.0"/>
                     <ColorPicker fx:id="colorpicker" maxWidth="1.7976931348623157E308"/>
                 </children>

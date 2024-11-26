@@ -44,6 +44,9 @@ public class PixelDrawingPane extends ZoomableScrollPane implements DrawingPaneA
         if (drawingMode == DrawingMode.REPLACE_PIXEL_COLOR) {
             replaceColorOfPixels(pixel.getFill(), selectedColor);
         }
+        if (drawingMode == DrawingMode.STANDARD_BUCKET) {
+            fillAllAdjacentPixels(pixel.getFill(), selectedColor);
+        }
     }
 
     private void fillAllPixelsWithColor() {
@@ -64,6 +67,10 @@ public class PixelDrawingPane extends ZoomableScrollPane implements DrawingPaneA
                 }
             }
         }
+    }
+
+    private void fillAllAdjacentPixels(Paint paintToReplace, Color newColor) {
+        System.out.println("fillAllAdjacentPixels");
     }
 
     @Override
