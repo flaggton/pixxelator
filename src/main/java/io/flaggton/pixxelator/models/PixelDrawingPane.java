@@ -9,6 +9,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class PixelDrawingPane extends ZoomableScrollPane implements DrawingPaneActions {
     private Color selectedColor = Color.WHITE;
     private DrawingMode drawingMode;
@@ -45,7 +48,7 @@ public class PixelDrawingPane extends ZoomableScrollPane implements DrawingPaneA
             replaceColorOfPixels(pixel.getFill(), selectedColor);
         }
         if (drawingMode == DrawingMode.STANDARD_BUCKET) {
-            fillAllAdjacentPixels(pixel.getFill(), selectedColor);
+            fillAllAdjacentPixels(pixel, selectedColor);
         }
     }
 
@@ -69,8 +72,65 @@ public class PixelDrawingPane extends ZoomableScrollPane implements DrawingPaneA
         }
     }
 
-    private void fillAllAdjacentPixels(Paint paintToReplace, Color newColor) {
-        System.out.println("fillAllAdjacentPixels");
+    private void fillAllAdjacentPixels(Rectangle pixel, Color newColor) {
+        Rectangle[][] xyMatrix = new Rectangle[gridPane.getColumnCount()][gridPane.getRowCount()];
+        for (Node node : gridPane.getChildren()) {
+            xyMatrix[GridPane.getColumnIndex(node)][GridPane.getRowIndex(node)] = (Rectangle) node;
+        }
+
+        final Integer pixelX = GridPane.getColumnIndex(pixel);
+        final Integer pixelY = GridPane.getRowIndex(pixel);
+
+        if (pixelX == null || pixelY == null) {
+            System.out.println("Pixel-Koordinaten konnten nicht ermittelt werden.");
+            return;
+        }
+
+        Color originalColor = (Color) pixel.getFill();
+
+        // Wenn die ursprüngliche Farbe gleich der neuen Farbe ist, breche ab
+        if (originalColor.equals(newColor)) {
+            System.out.println("Die neue Farbe entspricht bereits der Originalfarbe. Keine Änderungen erforderlich.");
+            return;
+        }
+
+        // Verwende eine Queue für die Flood-Fill-Logik (Breitensuche)
+        Queue<int[]> queue = new LinkedList<>();
+        queue.add(new int[]{pixelX, pixelY});
+
+        // Start Flood-Fill
+        while (!queue.isEmpty()) {
+            int[] current = queue.poll();
+            int x = current[0];
+            int y = current[1];
+
+            // Prüfe, ob die aktuellen Koordinaten innerhalb des Bereichs liegen
+            if (x < 0 || y < 0 || x >= xyMatrix.length || y >= xyMatrix[0].length) {
+                continue;
+            }
+
+            Rectangle currentPixel = xyMatrix[x][y];
+            if (currentPixel == null) {
+                continue;
+            }
+
+            // Hole die Farbe des aktuellen Pixels
+            Color currentColor = (Color) currentPixel.getFill();
+
+            // Überspringe Pixel, die nicht die ursprüngliche Farbe haben
+            if (!currentColor.equals(originalColor)) {
+                continue;
+            }
+
+            // Färbe das Pixel mit der neuen Farbe
+            currentPixel.setFill(newColor);
+
+            // Füge benachbarte Pixel in die Queue hinzu
+            queue.add(new int[]{x - 1, y}); // Links
+            queue.add(new int[]{x + 1, y}); // Rechts
+            queue.add(new int[]{x, y - 1}); // Oben
+            queue.add(new int[]{x, y + 1}); // Unten
+        }
     }
 
     @Override
