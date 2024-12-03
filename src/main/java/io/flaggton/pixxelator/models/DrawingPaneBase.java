@@ -5,7 +5,7 @@ import io.flaggton.pixxelator.enums.DrawingMode;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
 
-@SuppressWarnings("LombokSetterMayBeUsed")
+@SuppressWarnings({"LombokSetterMayBeUsed", "LombokGetterMayBeUsed"})
 public abstract class DrawingPaneBase extends ZoomableScrollPane {
 
     protected Color selectedColor = Color.WHITE;
@@ -20,7 +20,15 @@ public abstract class DrawingPaneBase extends ZoomableScrollPane {
         this.selectedColor = selectedColor;
     }
 
+    public Color getColor() {
+        return selectedColor;
+    }
+
     public void setDrawingMode(DrawingMode drawingMode) {
         this.drawingMode = drawingMode;
+    }
+
+    public DrawingMode getDrawingMode() {
+        return drawingMode;
     }
 }

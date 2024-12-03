@@ -86,8 +86,11 @@ public class MainController implements Initializable {
                 getClass().getResource("/io/flaggton/pixxelator/views/canvas-creation.fxml"),
                 null,
                 c -> ((CanvasCreationController) c).init(zoomableScrollPane -> {
-                    // machIrgendwas von Consumer wird hier gemacht
+                    Color selectedColor = getCurrentDrawingPane().getColor();
+                    DrawingMode drawingMode = getCurrentDrawingPane().getDrawingMode();
                     borderPane.setCenter(zoomableScrollPane);
+                    getCurrentDrawingPane().setColor(selectedColor);
+                    getCurrentDrawingPane().setDrawingMode(drawingMode);
                 }));
     }
 
