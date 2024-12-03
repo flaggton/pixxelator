@@ -12,8 +12,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class PixelDrawingPane extends DrawingPaneBase {
-    private Color selectedColor = Color.WHITE;
-    private DrawingMode drawingMode;
+
     private final GridPane gridPane;
 
     public PixelDrawingPane(int widthInPx, int heightInPx) {
@@ -130,15 +129,5 @@ public class PixelDrawingPane extends DrawingPaneBase {
             queue.add(new int[]{x, y - 1}); // Oben
             queue.add(new int[]{x, y + 1}); // Unten
         }
-    }
-
-    @Override
-    public void setDrawingMode(DrawingMode drawingMode) {
-        this.drawingMode = drawingMode;
-    }
-
-    @Override
-    public void setColor(Color selectedColor) {
-        this.selectedColor = selectedColor;
     }
 }

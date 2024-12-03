@@ -1,6 +1,5 @@
 package io.flaggton.pixxelator.models;
 
-import io.flaggton.pixxelator.enums.DrawingMode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
@@ -25,8 +24,8 @@ public class StandardDrawingPane extends DrawingPaneBase {
         pane.setOnMousePressed(e -> {
             if (e.isPrimaryButtonDown()) {
                 drawingPath = new Path();
-                drawingPath.setStroke(Color.BLACK);
-                drawingPath.setStrokeWidth(3);
+                drawingPath.setStroke(super.selectedColor);
+                drawingPath.setStrokeWidth(2);
                 drawingPath.getElements().add(new MoveTo(e.getX(), e.getY()));
                 pane.getChildren().add(drawingPath);
             }
@@ -40,15 +39,5 @@ public class StandardDrawingPane extends DrawingPaneBase {
     }
     private boolean isWithinBounds(double x, double y, Pane pane) {
         return x >= 0 && x <= pane.getWidth() && y >= 0 && y <= pane.getHeight();
-    }
-
-    @Override
-    public void setDrawingMode(DrawingMode drawingMode) {
-        System.out.println("StandardDrawingPane drawingMode = " + drawingMode);
-    }
-
-    @Override
-    public void setColor(Color selectedColor) {
-        System.out.println("StandardDrawingPane selectedColor = " + selectedColor.toString());
     }
 }
