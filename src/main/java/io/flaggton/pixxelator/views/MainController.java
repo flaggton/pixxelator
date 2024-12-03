@@ -54,7 +54,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        borderPane.setCenter(new PixelDrawingPane(64, 64));
+        borderPane.setCenter(new PixelDrawingPane(64, 64, Color.WHITE));
 
         ToggleGroup drawingActions = new ToggleGroup();
         unsetRadioButton.setToggleGroup(drawingActions);

@@ -7,6 +7,7 @@ import io.flaggton.pixxelator.models.StandardDrawingPane;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -24,6 +25,8 @@ public class CreateNewDrawingPaneController {
     public TextField newCanvasWidth;
     @FXML
     private ChoiceBox<DrawingPaneType> drawingPaneTypeChoiceBox;
+    @FXML
+    private ColorPicker backgroundColorPicker;
     private Consumer<DrawingPaneBase> onConfirmButtonClickAction;
 
     public void init(Consumer<DrawingPaneBase> onConfirmButtonClickAction) {
@@ -49,9 +52,9 @@ public class CreateNewDrawingPaneController {
         }
         DrawingPaneBase drawingPaneBase;
         if (drawingPaneTypeChoiceBox.getSelectionModel().getSelectedItem() == DrawingPaneType.STANDARD_DRAWING_PANE) {
-            drawingPaneBase = new StandardDrawingPane(width, height);
+            drawingPaneBase = new StandardDrawingPane(width, height, backgroundColorPicker.getValue());
         } else {
-            drawingPaneBase = new PixelDrawingPane(width, height);
+            drawingPaneBase = new PixelDrawingPane(width, height, backgroundColorPicker.getValue());
         }
         onConfirmButtonClickAction.accept(drawingPaneBase);
         Stage stage = (Stage) newCanvasHeight.getScene().getWindow();

@@ -15,7 +15,7 @@ public class PixelDrawingPane extends DrawingPaneBase {
 
     private final GridPane gridPane;
 
-    public PixelDrawingPane(int widthInPx, int heightInPx) {
+    public PixelDrawingPane(int widthInPx, int heightInPx, Color backgroundColor) {
         super(new GridPane());
         gridPane = (GridPane) getContentNode();
         for (int x = 0; x < widthInPx; x++) {
@@ -23,6 +23,7 @@ public class PixelDrawingPane extends DrawingPaneBase {
                 gridPane.add(createPixelTile(), x, y);
             }
         }
+        fillAllPixelsWithColor(backgroundColor);
     }
 
     private Rectangle createPixelTile() {
@@ -51,10 +52,14 @@ public class PixelDrawingPane extends DrawingPaneBase {
     }
 
     private void fillAllPixelsWithColor() {
+        fillAllPixelsWithColor(selectedColor);
+    }
+
+    private void fillAllPixelsWithColor(Color color) {
         for (Node node : gridPane.getChildren()) {
             if (node instanceof Rectangle) { // <- überprüft ob alle "node" wirklich Rectangle sind, bevor gecastet wird -> Program geht nicht kabumm
                 Rectangle pixel = (Rectangle) node;
-                pixel.setFill(selectedColor);
+                pixel.setFill(color);
             }
         }
     }

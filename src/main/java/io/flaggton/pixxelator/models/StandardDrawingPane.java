@@ -11,7 +11,7 @@ import javafx.scene.shape.Path;
 public class StandardDrawingPane extends DrawingPaneBase {
     private Path drawingPath;
 
-    public StandardDrawingPane(int width, int height) {
+    public StandardDrawingPane(int width, int height, Color backgroundColor) {
         super(new Pane());
         Pane pane = (Pane) getContentNode();
         pane.setPrefWidth(width);
@@ -20,7 +20,7 @@ public class StandardDrawingPane extends DrawingPaneBase {
         pane.setPrefHeight(height);
         pane.setMaxHeight(height);
         pane.setMinHeight(height);
-        pane.setBackground(new Background(new BackgroundFill(Color.SALMON, null, null)));
+        pane.setBackground(new Background(new BackgroundFill(backgroundColor, null, null)));
         pane.setOnMousePressed(e -> {
             if (e.isPrimaryButtonDown()) {
                 drawingPath = new Path();
@@ -37,6 +37,7 @@ public class StandardDrawingPane extends DrawingPaneBase {
             }
         });
     }
+
     private boolean isWithinBounds(double x, double y, Pane pane) {
         return x >= 0 && x <= pane.getWidth() && y >= 0 && y <= pane.getHeight();
     }
