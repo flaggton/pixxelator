@@ -1,8 +1,12 @@
 package io.flaggton.pixxelator.views;
 
-import com.wedasoft.wedasoftFxCustomNodes.zoomableScrollPane.ZoomableScrollPane;
+import io.flaggton.pixxelator.enums.DrawingPaneType;
+import io.flaggton.pixxelator.models.DrawingPaneBase;
+import io.flaggton.pixxelator.models.PixelDrawingPane;
 import io.flaggton.pixxelator.models.StandardDrawingPane;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -13,15 +17,19 @@ import java.util.function.Consumer;
 
 @Component
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-public class CanvasCreationController {
+public class CreateNewDrawingPaneController {
     @FXML
     public TextField newCanvasHeight;
     @FXML
     public TextField newCanvasWidth;
-    private Consumer<ZoomableScrollPane> onConfirmButtonClickAction;
+    @FXML
+    private ChoiceBox<DrawingPaneType> drawingPaneTypeChoiceBox;
+    private Consumer<DrawingPaneBase> onConfirmButtonClickAction;
 
-    public void init(Consumer<ZoomableScrollPane> onConfirmButtonClickAction) {
+    public void init(Consumer<DrawingPaneBase> onConfirmButtonClickAction) {
         this.onConfirmButtonClickAction = onConfirmButtonClickAction;
+        drawingPaneTypeChoiceBox.setItems(FXCollections.observableArrayList(DrawingPaneType.values()));
+        drawingPaneTypeChoiceBox.getSelectionModel().selectFirst();
     }
 
     public void onConfirmButtonClick() {
@@ -39,9 +47,13 @@ public class CanvasCreationController {
             System.out.println("Ungültige Breite");
             return;
         }
-        StandardDrawingPane standardDrawingPane = new StandardDrawingPane(width, height);
-        // machIrgendwas.mit(diesemObjekt);
-        onConfirmButtonClickAction.accept(standardDrawingPane);
+        DrawingPaneBase drawingPaneBase;
+        if (drawingPaneTypeChoiceBox.getSelectionModel().getSelectedItem() == DrawingPaneType.STANDARD_DRAWING_PANE) {
+            drawingPaneBase = new StandardDrawingPane(width, height);
+        } else {
+            drawingPaneBase = new PixelDrawingPane(width, height);
+        }
+        onConfirmButtonClickAction.accept(drawingPaneBase);
         Stage stage = (Stage) newCanvasHeight.getScene().getWindow();
         stage.close();
     }

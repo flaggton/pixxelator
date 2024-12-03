@@ -81,21 +81,17 @@ public class MainController implements Initializable {
         System.exit(0);
     }
 
-    public void onNewStandardCanvasButtonClick() throws IOException {
-        jfxUiService.createAndShowFxmlDialog("New Canvas", true, false,
-                getClass().getResource("/io/flaggton/pixxelator/views/canvas-creation.fxml"),
+    public void onNewDrawingPaneButtonClick() throws IOException {
+        jfxUiService.createAndShowFxmlDialog("New drawing pane", true, false,
+                getClass().getResource("/io/flaggton/pixxelator/views/create-new-drawing-pane.fxml"),
                 null,
-                c -> ((CanvasCreationController) c).init(zoomableScrollPane -> {
+                c -> ((CreateNewDrawingPaneController) c).init(drawingPaneBase -> {
                     Color selectedColor = getCurrentDrawingPane().getColor();
                     DrawingMode drawingMode = getCurrentDrawingPane().getDrawingMode();
-                    borderPane.setCenter(zoomableScrollPane);
+                    borderPane.setCenter(drawingPaneBase);
                     getCurrentDrawingPane().setColor(selectedColor);
                     getCurrentDrawingPane().setDrawingMode(drawingMode);
                 }));
-    }
-
-    public void onNewPixelCanvasButtonClick() {
-        borderPane.setCenter(new PixelDrawingPane(5, 10));
     }
 
     private void onDrawingModeSelected(DrawingMode selectedDrawingMode) {
