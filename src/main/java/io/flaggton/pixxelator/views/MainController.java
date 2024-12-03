@@ -3,7 +3,7 @@ package io.flaggton.pixxelator.views;
 import com.wedasoft.wedasoftFxCustomNodes.zoomableScrollPane.ZoomableScrollPane;
 import com.wedasoft.wedasoftFxGuiCommons.jfxDialogs.JfxDialogUtil;
 import io.flaggton.pixxelator.enums.DrawingMode;
-import io.flaggton.pixxelator.models.DrawingPaneActions;
+import io.flaggton.pixxelator.models.DrawingPaneBase;
 import io.flaggton.pixxelator.models.PixelDrawingPane;
 import io.flaggton.pixxelator.services.HelperService;
 import io.flaggton.pixxelator.services.JfxUiService;
@@ -98,13 +98,13 @@ public class MainController implements Initializable {
 
     private void onDrawingModeSelected(DrawingMode selectedDrawingMode) {
         Node anyDrawingPane = borderPane.getCenter();
-        DrawingPaneActions drawingPaneActions = (DrawingPaneActions) anyDrawingPane;
+        DrawingPaneBase drawingPaneActions = (DrawingPaneBase) anyDrawingPane;
         drawingPaneActions.setDrawingMode(selectedDrawingMode);
     }
 
     private void onColorSelected(Color selectedColor) {
         Node anyDrawingPane = borderPane.getCenter();
-        DrawingPaneActions drawingPaneActions = (DrawingPaneActions) anyDrawingPane;
+        DrawingPaneBase drawingPaneActions = (DrawingPaneBase) anyDrawingPane;
         drawingPaneActions.setColor(selectedColor);
     }
 

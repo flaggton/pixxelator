@@ -1,6 +1,5 @@
 package io.flaggton.pixxelator.models;
 
-import com.wedasoft.wedasoftFxCustomNodes.zoomableScrollPane.ZoomableScrollPane;
 import io.flaggton.pixxelator.enums.DrawingMode;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
@@ -12,7 +11,7 @@ import javafx.scene.shape.Rectangle;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class PixelDrawingPane extends ZoomableScrollPane implements DrawingPaneActions {
+public class PixelDrawingPane extends DrawingPaneBase {
     private Color selectedColor = Color.WHITE;
     private DrawingMode drawingMode;
     private final GridPane gridPane;

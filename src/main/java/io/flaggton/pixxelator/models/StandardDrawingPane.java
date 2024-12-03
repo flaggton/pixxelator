@@ -1,6 +1,5 @@
 package io.flaggton.pixxelator.models;
 
-import com.wedasoft.wedasoftFxCustomNodes.zoomableScrollPane.ZoomableScrollPane;
 import io.flaggton.pixxelator.enums.DrawingMode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -10,7 +9,7 @@ import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 
-public class StandardDrawingPane extends ZoomableScrollPane implements DrawingPaneActions {
+public class StandardDrawingPane extends DrawingPaneBase {
     private Path drawingPath;
 
     public StandardDrawingPane(int width, int height) {
