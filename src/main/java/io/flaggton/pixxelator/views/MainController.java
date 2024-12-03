@@ -10,7 +10,6 @@ import io.flaggton.pixxelator.services.JfxUiService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -97,15 +96,15 @@ public class MainController implements Initializable {
     }
 
     private void onDrawingModeSelected(DrawingMode selectedDrawingMode) {
-        Node anyDrawingPane = borderPane.getCenter();
-        DrawingPaneBase drawingPaneActions = (DrawingPaneBase) anyDrawingPane;
-        drawingPaneActions.setDrawingMode(selectedDrawingMode);
+        getCurrentDrawingPane().setDrawingMode(selectedDrawingMode);
     }
 
     private void onColorSelected(Color selectedColor) {
-        Node anyDrawingPane = borderPane.getCenter();
-        DrawingPaneBase drawingPaneActions = (DrawingPaneBase) anyDrawingPane;
-        drawingPaneActions.setColor(selectedColor);
+        getCurrentDrawingPane().setColor(selectedColor);
+    }
+
+    private DrawingPaneBase getCurrentDrawingPane() {
+        return (DrawingPaneBase) borderPane.getCenter();
     }
 
     public void onSaveAsButtonClick() {
