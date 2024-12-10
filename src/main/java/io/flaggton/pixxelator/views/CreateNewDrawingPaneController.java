@@ -21,9 +21,9 @@ import java.util.function.Consumer;
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class CreateNewDrawingPaneController {
     @FXML
-    public TextField newCanvasHeight;
+    public TextField newCanvasHeightTextField;
     @FXML
-    public TextField newCanvasWidth;
+    public TextField newCanvasWidthTextField;
     @FXML
     private ChoiceBox<DrawingPaneType> drawingPaneTypeChoiceBox;
     @FXML
@@ -34,19 +34,21 @@ public class CreateNewDrawingPaneController {
         this.onConfirmButtonClickAction = onConfirmButtonClickAction;
         drawingPaneTypeChoiceBox.setItems(FXCollections.observableArrayList(DrawingPaneType.values()));
         drawingPaneTypeChoiceBox.getSelectionModel().selectFirst();
+        newCanvasWidthTextField.setText("64");
+        newCanvasHeightTextField.setText("64");
     }
 
     public void onConfirmButtonClick() {
         int height;
         try {
-            height = Integer.parseInt(newCanvasHeight.getText());
+            height = Integer.parseInt(newCanvasHeightTextField.getText());
         } catch (NumberFormatException e) {
             System.out.println("Ungültige Höhe.");
             return;
         }
         int width;
         try {
-            width = Integer.parseInt(newCanvasWidth.getText());
+            width = Integer.parseInt(newCanvasWidthTextField.getText());
         } catch (NumberFormatException e) {
             System.out.println("Ungültige Breite");
             return;
@@ -62,12 +64,12 @@ public class CreateNewDrawingPaneController {
             throw new RuntimeException("Drawing pane type not supported.");
         }
         onConfirmButtonClickAction.accept(drawingPaneBase);
-        Stage stage = (Stage) newCanvasHeight.getScene().getWindow();
+        Stage stage = (Stage) newCanvasHeightTextField.getScene().getWindow();
         stage.close();
     }
 
     public void onCancelButtonClick() {
-        Stage stage = (Stage) newCanvasHeight.getScene().getWindow();
+        Stage stage = (Stage) newCanvasHeightTextField.getScene().getWindow();
         stage.close();
     }
 }
