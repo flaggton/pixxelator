@@ -39,11 +39,12 @@ public class PixelDrawingPane extends DrawingPaneBase {
     }
 
     private void onPixelClickOrDragOver(MouseEvent e, Rectangle pixel) {
+        Color selectedColor = e.isPrimaryButtonDown() ? primaryColor : secondaryColor;
         if (drawingMode == DrawingMode.PENCIL) {
             pixel.setFill(selectedColor);
         }
         if (drawingMode == DrawingMode.FILL_ALL) {
-            fillAllPixelsWithColor();
+            fillAllPixelsWithColor(selectedColor);
         }
         if (drawingMode == DrawingMode.REPLACE_PIXEL_COLOR) {
             replaceColorOfPixels(pixel.getFill(), selectedColor);
@@ -51,10 +52,6 @@ public class PixelDrawingPane extends DrawingPaneBase {
         if (drawingMode == DrawingMode.STANDARD_BUCKET) {
             fillAllAdjacentPixels(pixel, selectedColor);
         }
-    }
-
-    private void fillAllPixelsWithColor() {
-        fillAllPixelsWithColor(selectedColor);
     }
 
     private void fillAllPixelsWithColor(Color color) {

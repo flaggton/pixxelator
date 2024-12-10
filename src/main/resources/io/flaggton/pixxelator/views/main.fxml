@@ -44,7 +44,11 @@
                 <children>
                     <VBox fx:id="radioButtonsVBox" spacing="8.0"/>
                     <Separator prefWidth="200.0"/>
-                    <ColorPicker fx:id="colorpicker" maxWidth="1.7976931348623157E308"/>
+                    <Label text="Primary color"/>
+                    <ColorPicker fx:id="primaryColorPicker" maxWidth="1.7976931348623157E308"/>
+                    <Separator prefWidth="200.0"/>
+                    <Label text="Secondary color"/>
+                    <ColorPicker fx:id="secondaryColorPicker" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS"/>
                 </children>
             </VBox>
          </children>

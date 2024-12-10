@@ -30,7 +30,7 @@ public class StandardDrawingPane extends DrawingPaneBase {
         pane.setOnMousePressed(e -> {
             if (e.isPrimaryButtonDown()) {
                 drawingPath = new Path();
-                drawingPath.setStroke(super.selectedColor);
+                drawingPath.setStroke(super.primaryColor);
                 drawingPath.setStrokeWidth(2);
                 drawingPath.getElements().add(new MoveTo(e.getX(), e.getY()));
                 pane.getChildren().add(drawingPath);

@@ -43,13 +43,17 @@ public class MainController implements Initializable {
     @FXML
     private VBox radioButtonsVBox;
     @FXML
-    private ColorPicker colorpicker;
+    private ColorPicker primaryColorPicker;
+    @FXML
+    private ColorPicker secondaryColorPicker;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setDrawingPaneIntoBorderPaneCenterAndConfigureRadioButtons(new PixelDrawingPane(64, 64, Color.WHITE));
 
-        colorpicker.setOnAction(actionEvent -> onColorSelected(colorpicker.getValue()));
+        primaryColorPicker.setOnAction(actionEvent -> getCurrentDrawingPane().setPrimaryColor(primaryColorPicker.getValue()));
+
+        secondaryColorPicker.setOnAction(actionEvent -> getCurrentDrawingPane().setSecondaryColor(secondaryColorPicker.getValue()));
 
         Platform.runLater(() -> {
             borderPane.getScene().addEventFilter(MouseEvent.DRAG_DETECTED, e -> borderPane.getScene().startFullDrag()); // drag over tile with starting dragging from outside
@@ -80,20 +84,16 @@ public class MainController implements Initializable {
                 getClass().getResource("/io/flaggton/pixxelator/views/create-new-drawing-pane.fxml"),
                 null,
                 c -> ((CreateNewDrawingPaneController) c).init(drawingPaneBase -> {
-                    Color selectedColor = getCurrentDrawingPane().getColor();
+                    Color selectedColor = getCurrentDrawingPane().getPrimaryColor();
                     DrawingMode drawingMode = getCurrentDrawingPane().getDrawingMode();
                     setDrawingPaneIntoBorderPaneCenterAndConfigureRadioButtons(drawingPaneBase);
-                    getCurrentDrawingPane().setColor(selectedColor);
+                    getCurrentDrawingPane().setPrimaryColor(selectedColor);
                     getCurrentDrawingPane().setDrawingMode(drawingMode);
                 }));
     }
 
     private void onDrawingModeSelected(DrawingMode selectedDrawingMode) {
         getCurrentDrawingPane().setDrawingMode(selectedDrawingMode);
-    }
-
-    private void onColorSelected(Color selectedColor) {
-        getCurrentDrawingPane().setColor(selectedColor);
     }
 
     private DrawingPaneBase getCurrentDrawingPane() {

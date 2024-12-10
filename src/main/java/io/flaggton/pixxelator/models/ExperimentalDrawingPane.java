@@ -41,24 +41,24 @@ public class ExperimentalDrawingPane extends DrawingPaneBase {
 
     private void onPixelClickOrDragOver(MouseEvent e, Rectangle pixel) {
         if (drawingMode == DrawingMode.PENCIL) {
-            pixel.setFill(selectedColor);
+            pixel.setFill(primaryColor);
         }
         if (drawingMode == DrawingMode.FILL_ALL) {
             fillAllPixelsWithColor();
         }
         if (drawingMode == DrawingMode.REPLACE_PIXEL_COLOR) {
-            replaceColorOfPixels(pixel.getFill(), selectedColor);
+            replaceColorOfPixels(pixel.getFill(), primaryColor);
         }
         if (drawingMode == DrawingMode.STANDARD_BUCKET) {
-            fillAllAdjacentPixels(pixel, selectedColor);
+            fillAllAdjacentPixels(pixel, primaryColor);
         }
         if (drawingMode == SPILL_PAINT) {
-            spillPaint(pixel, selectedColor);
+            spillPaint(pixel, primaryColor);
         }
     }
 
     private void fillAllPixelsWithColor() {
-        fillAllPixelsWithColor(selectedColor);
+        fillAllPixelsWithColor(primaryColor);
     }
 
     private void fillAllPixelsWithColor(Color color) {
