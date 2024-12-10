@@ -10,8 +10,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="Start">
             <items>
-                <MenuItem mnemonicParsing="false" onAction="#onNewDrawingPaneButtonClick"
-                          text="New drawing pane"/>
+                <MenuItem mnemonicParsing="false" onAction="#onNewDrawingPaneButtonClick" text="New drawing pane"/>
                 <SeparatorMenuItem mnemonicParsing="false"/>
                 <MenuItem mnemonicParsing="false" onAction="#onSaveAsButtonClick" text="Save as..."/>
                   <SeparatorMenuItem mnemonicParsing="false" />
@@ -43,12 +42,7 @@
                   <Insets />
                </HBox.margin>
                 <children>
-                    <RadioButton fx:id="unsetRadioButton" mnemonicParsing="false" text="Unset"/>
-                    <RadioButton fx:id="pencilRadioButton" mnemonicParsing="false" text="Pencil"/>
-                    <RadioButton fx:id="fillAllRadioButton" mnemonicParsing="false" text="Fill all"/>
-                    <RadioButton fx:id="replacePixelColorRadioButton" mnemonicParsing="false"
-                                 text="Replace pixel color"/>
-                    <RadioButton fx:id="standardBucketRadioButton" mnemonicParsing="false" text="Bucket (Standard)"/>
+                    <VBox fx:id="radioButtonsVBox"/>
                     <Separator prefWidth="200.0"/>
                     <ColorPicker fx:id="colorpicker" maxWidth="1.7976931348623157E308"/>
                 </children>

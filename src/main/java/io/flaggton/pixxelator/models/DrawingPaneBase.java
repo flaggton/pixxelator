@@ -5,6 +5,8 @@ import io.flaggton.pixxelator.enums.DrawingMode;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
 
+import java.util.List;
+
 @SuppressWarnings({"LombokSetterMayBeUsed", "LombokGetterMayBeUsed"})
 public abstract class DrawingPaneBase extends ZoomableScrollPane {
 
@@ -31,4 +33,6 @@ public abstract class DrawingPaneBase extends ZoomableScrollPane {
     public DrawingMode getDrawingMode() {
         return drawingMode;
     }
+
+    public abstract List<DrawingMode> getAvailableDrawingModes();
 }

@@ -1,5 +1,6 @@
 package io.flaggton.pixxelator.models;
 
+import io.flaggton.pixxelator.enums.DrawingMode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
@@ -7,6 +8,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
+
+import java.util.List;
+
+import static io.flaggton.pixxelator.enums.DrawingMode.PENCIL;
+import static io.flaggton.pixxelator.enums.DrawingMode.UNSET;
 
 public class StandardDrawingPane extends DrawingPaneBase {
     private Path drawingPath;
@@ -40,5 +46,10 @@ public class StandardDrawingPane extends DrawingPaneBase {
 
     private boolean isWithinBounds(double x, double y, Pane pane) {
         return x >= 0 && x <= pane.getWidth() && y >= 0 && y <= pane.getHeight();
+    }
+
+    @Override
+    public List<DrawingMode> getAvailableDrawingModes() {
+        return List.of(UNSET, PENCIL);
     }
 }

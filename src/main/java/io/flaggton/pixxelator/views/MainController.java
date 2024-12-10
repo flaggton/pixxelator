@@ -17,6 +17,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,40 +41,33 @@ public class MainController implements Initializable {
     @FXML
     private BorderPane borderPane;
     @FXML
-    private RadioButton unsetRadioButton;
-    @FXML
-    private RadioButton pencilRadioButton;
-    @FXML
-    private RadioButton fillAllRadioButton;
-    @FXML
-    private RadioButton replacePixelColorRadioButton;
-    @FXML
-    private RadioButton standardBucketRadioButton;
+    private VBox radioButtonsVBox;
     @FXML
     private ColorPicker colorpicker;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        borderPane.setCenter(new PixelDrawingPane(64, 64, Color.WHITE));
-
-        ToggleGroup drawingActions = new ToggleGroup();
-        unsetRadioButton.setToggleGroup(drawingActions);
-        unsetRadioButton.setOnAction(actionEvent -> onDrawingModeSelected(DrawingMode.UNSET));
-        pencilRadioButton.setToggleGroup(drawingActions);
-        pencilRadioButton.setOnAction(actionEvent -> onDrawingModeSelected(DrawingMode.PENCIL));
-        fillAllRadioButton.setToggleGroup(drawingActions);
-        fillAllRadioButton.setOnAction(actionEvent -> onDrawingModeSelected(DrawingMode.FILL_ALL));
-        replacePixelColorRadioButton.setToggleGroup(drawingActions);
-        replacePixelColorRadioButton.setOnAction(actionEvent -> onDrawingModeSelected(DrawingMode.REPLACE_PIXEL_COLOR));
-        standardBucketRadioButton.setToggleGroup(drawingActions);
-        standardBucketRadioButton.setOnAction(actionEvent -> onDrawingModeSelected(DrawingMode.STANDARD_BUCKET));
-        drawingActions.selectToggle(unsetRadioButton);
+        setDrawingPaneIntoBorderPaneCenterAndConfigureRadioButtons(new PixelDrawingPane(64, 64, Color.WHITE));
 
         colorpicker.setOnAction(actionEvent -> onColorSelected(colorpicker.getValue()));
 
         Platform.runLater(() -> {
             borderPane.getScene().addEventFilter(MouseEvent.DRAG_DETECTED, e -> borderPane.getScene().startFullDrag()); // drag over tile with starting dragging from outside
         });
+    }
+
+    private void setDrawingPaneIntoBorderPaneCenterAndConfigureRadioButtons(DrawingPaneBase drawingPane) {
+        borderPane.setCenter(drawingPane);
+
+        ToggleGroup toggleGroup = new ToggleGroup();
+        radioButtonsVBox.getChildren().clear();
+        for (DrawingMode drawingMode : drawingPane.getAvailableDrawingModes()) {
+            RadioButton radioButton = new RadioButton(drawingMode.getUiText());
+            radioButton.setToggleGroup(toggleGroup);
+            radioButton.setOnAction(actionEvent -> onDrawingModeSelected(drawingMode));
+            radioButtonsVBox.getChildren().add(radioButton);
+        }
+        toggleGroup.selectToggle(toggleGroup.getToggles().get(0));
     }
 
     public void onExitMenuItemClick() {
@@ -88,7 +82,7 @@ public class MainController implements Initializable {
                 c -> ((CreateNewDrawingPaneController) c).init(drawingPaneBase -> {
                     Color selectedColor = getCurrentDrawingPane().getColor();
                     DrawingMode drawingMode = getCurrentDrawingPane().getDrawingMode();
-                    borderPane.setCenter(drawingPaneBase);
+                    setDrawingPaneIntoBorderPaneCenterAndConfigureRadioButtons(drawingPaneBase);
                     getCurrentDrawingPane().setColor(selectedColor);
                     getCurrentDrawingPane().setDrawingMode(drawingMode);
                 }));

@@ -9,10 +9,12 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
-public class PixelDrawingPane extends DrawingPaneBase {
+import static io.flaggton.pixxelator.enums.DrawingMode.*;
 
+public class PixelDrawingPane extends DrawingPaneBase {
     private final GridPane gridPane;
 
     public PixelDrawingPane(int widthInPx, int heightInPx, Color backgroundColor) {
@@ -134,5 +136,10 @@ public class PixelDrawingPane extends DrawingPaneBase {
             queue.add(new int[]{x, y - 1}); // Oben
             queue.add(new int[]{x, y + 1}); // Unten
         }
+    }
+
+    @Override
+    public List<DrawingMode> getAvailableDrawingModes() {
+        return List.of(UNSET, PENCIL, FILL_ALL, REPLACE_PIXEL_COLOR, STANDARD_BUCKET);
     }
 }
