@@ -9,7 +9,8 @@ public enum DrawingMode {
     PENCIL("Pencil"),
     FILL_ALL("Fill all"),
     REPLACE_PIXEL_COLOR("Replace pixel color"),
-    STANDARD_BUCKET("Standard bucket");
+    STANDARD_BUCKET("Standard bucket"),
+    SPILL_PAINT("Spill paint");
 
     private final String uiText;
 
