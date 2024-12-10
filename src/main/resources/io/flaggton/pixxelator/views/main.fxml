@@ -42,7 +42,7 @@
                   <Insets />
                </HBox.margin>
                 <children>
-                    <VBox fx:id="radioButtonsVBox"/>
+                    <VBox fx:id="radioButtonsVBox" spacing="8.0"/>
                     <Separator prefWidth="200.0"/>
                     <ColorPicker fx:id="colorpicker" maxWidth="1.7976931348623157E308"/>
                 </children>
